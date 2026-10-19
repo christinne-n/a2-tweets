@@ -34,7 +34,7 @@ function parseTweets(runkeeper_tweets) {
 	//Write out the Month, Day, and Year of the earliest and latest Tweet (e.g., Monday, January 18, 2021)
 	var dates = {month: 'long', day: 'numeric', year: 'numeric'}
 	document.getElementById('firstDate').innerText = earliest.toLocaleDateString('en-US', dates);
-	document.getElementById('lastDate').innerText = earliest.toLocaleDateString('en-US', dates);
+	document.getElementById('lastDate').innerText = latest.toLocaleDateString('en-US', dates);
 	//getting element id from index.html
 
 	//completedEvents, liveEvents, achievements, miscellaneous ; counting each to get the number
@@ -54,6 +54,12 @@ function parseTweets(runkeeper_tweets) {
 			misc++;
 		}
 	}
+	var user_text=0; //counting num of completed events and written user text 
+	for(let i=0; i<tweet_array.length; i++){
+		if(tweet_array[i].source == "completed_event" && tweet_array[i].written){
+			user_text++;
+		}
+	}
 
 	//getting # and % per category, making sure decimal places only 2 places
 	getClassText('completedEvents', complete);
@@ -64,6 +70,10 @@ function parseTweets(runkeeper_tweets) {
 	getClassText('achievementsPct', (achieve/tweet_array.length* 100).toFixed(2)+"%");
 	getClassText('miscellaneous', misc);
 	getClassText('miscellaneousPct', (misc/tweet_array.length* 100).toFixed(2)+"%");
+
+	//completed events and written user text
+	getClassText('written', user_text);
+	getClassText('writtenPct', (user_text/complete* 100).toFixed(2)+"%");
 }
 
 //Wait for the DOM to load

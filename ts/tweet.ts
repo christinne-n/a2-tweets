@@ -30,7 +30,8 @@ class Tweet {
     //returns a boolean, whether the text includes any content written by the person tweeting.
     get written():boolean {
         //TODO: identify whether the tweet is written
-        return false;
+        //had to look through saved_tweets.json to see the keywords
+        return this.text.includes(" - ")&& !this.text.includes("TomTom MySports Watch"); //written by watch is not by user
     }
 
     get writtenText():string {
