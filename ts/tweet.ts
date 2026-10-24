@@ -59,6 +59,15 @@ class Tweet {
             return 0;
         }
         //TODO: prase the distance from the text of the tweet
+        var tweets = this.text.split(" ");
+        var dist = parseFloat(tweets[3]);//str to float 
+        if (tweets[4] == "km"){
+            return dist/1.609; //convert km to mi
+        }
+        else if (tweets[4] == "mi"){
+            return dist;
+        }
+
         return 0;
     }
 
