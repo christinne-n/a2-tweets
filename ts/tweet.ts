@@ -47,7 +47,11 @@ class Tweet {
             return "unknown";
         }
         //TODO: parse the activity type from the text of the tweet
-        return "";
+        var tweets = this.text.split(" ");
+        if (tweets[4] == "km" || tweets[4] == "mi"){
+            return tweets[5];
+        }//typically the pattern when looking at the saved_tweets is that the distance is the 4th word and activity is after
+        return tweets[3]; // if no distance is there then just return the 3rd one since that is the usual pattern
     }
 
     get distance():number {
