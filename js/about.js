@@ -76,26 +76,6 @@ function parseTweets(runkeeper_tweets) {
 	getClassText('writtenPct', (user_text/complete* 100).toFixed(2)+"%");
 }
 
-var complete_tweets = tweet_array.filter(function(tweet) {
-	return tweet.source == "completed_event";
-});//getcompleted tweets for activity 
-
-var count_activity = {}; //number of tweets based on activity
-for (let i=0; i< completed.length; i++){
-	var type = completed[i].activityType;
-	if (count_activity[type]== undefined){
-		count_activity[type] = 1; //first activity detected
-	}
-	else{
-		count_activity[type]++; //keeps adding on
-	}
-}
-
-var sort_activity = Object.entries(count_activity).sort( function(a,b){
-	return b[1] - a[1]; //descending order sort ; ex: ["run", 999]
-});
-
-
 //Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', function (event) {
 	loadSavedRunkeeperTweets().then(parseTweets);

@@ -10,7 +10,29 @@ function parseTweets(runkeeper_tweets) {
 	tweet_array = runkeeper_tweets.map(function(tweet) {
 		return new Tweet(tweet.text, tweet.created_at);
 	});
+	var complete_tweets = tweet_array.filter(function(tweet) {
+	return tweet.source == "completed_event";
+	});//getcompleted tweets for activity 
 
+	var count_activity = {}; //number of tweets based on activity
+	for (let i=0; i< complete_tweets.length; i++){
+		var type = complete_tweets[i].activityType;
+		if (count_activity[type]== undefined){
+			count_activity[type] = 1; //first activity detected
+		}
+		else{
+			count_activity[type]++; //keeps adding on
+		}
+	}
+
+	var sort_activity = Object.entries(count_activity).sort( function(a,b){
+		return b[1] - a[1]; //descending order sort ; ex: ["run", 999]
+	});
+	//adding to wide range of activities page
+	document.getElementById('numberActivities').innerText = sort_activity.length;
+	document.getElementById('firstMost').innerText = sort_activity[0][0];
+	document.getElementById('secondMost').innerText = sort_activity[1][0];
+	document.getElementById('thirdMost').innerText = sort_activity[2][0];
 	//TODO: create a new array or manipulate tweet_array to create a graph of the number of tweets containing each type of activity.
 
 	activity_vis_spec = {
@@ -22,7 +44,7 @@ function parseTweets(runkeeper_tweets) {
 	  //TODO: Add mark and encoding
 	};
 	vegaEmbed('#activityVis', activity_vis_spec, {actions:false});
-
+	
 	//TODO: create the visualizations which group the three most-tweeted activities by the day of the week.
 	//Use those visualizations to answer the questions about which activities tended to be longest and when.
 }
