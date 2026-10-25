@@ -39,7 +39,10 @@ class Tweet {
             return "";
         }
         //TODO: parse the written text from the tweet
-        return "";
+        var start = this.text.indexOf(" - ") + 3; //skip the -
+        var end = this.text.indexOf("https"); //ends when link is present
+
+        return this.text.substring(start, end).trim();
     }
 
     get activityType():string {
