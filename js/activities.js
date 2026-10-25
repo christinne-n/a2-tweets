@@ -94,6 +94,25 @@ function parseTweets(runkeeper_tweets) {
 	  }
 	}
 	vegaEmbed('#distanceVisAggregated', meanactivity_vis_spec, {actions:false});
+
+	document.getElementById('distanceVisAggregated').style.display="none"; //all activities
+
+	//button to swap the charts we want to see
+	var button = document.getElementById('aggregate');
+	button.addEventListener('click', function(){
+		var all_vis = document.getElementById('distanceVis');
+		var mean_vis = document.getElementById('distanceVisAggregated');
+		if (all_vis.style.display =="none"){
+			all_vis.style.display ="block";
+			mean_vis.style.display ="none";
+			button.innerText = "show means"; //switch graphs
+		}
+		else{
+			all_vis.style.display="none";
+			mean_vis.style.display ="block";
+			button.innerText = "Show all activities";
+		}
+	});
 }
 //Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', function (event) {
