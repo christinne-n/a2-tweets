@@ -50,16 +50,36 @@ function parseTweets(runkeeper_tweets) {
 	    "values": activity_type
 	  },
 	  "mark": "bar",
-	  
+	  "encoding": { 
+		"x": {"field": "activityType", "type": "nominal", "sort":"-y", "title":"Activity Type"},
+		"y": {"aggregate": "count", "type": "quantitative", "title": "Number of tweets"}
+	  }
 	  //TODO: Add mark and encoding
-
 	};
 	vegaEmbed('#activityVis', activity_vis_spec, {actions:false});
-	
+	var top_act = [sort_activity[0][0], sort_activity[1][0], sort_activity[2][0]];
 	//TODO: create the visualizations which group the three most-tweeted activities by the day of the week.
 	//Use those visualizations to answer the questions about which activities tended to be longest and when.
-}
+	var activity_day = complete_tweets.filter(function(tweet){
+		return top_act.includes(tweet.activityType); }).map(function(tweet){
+		return {activityType: tweet.activityType, distance: tweet.distance, time: tweet.time};
+	});
 
+	activityday_vis_spec = {
+	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+	  "description": "A graph of the 3 most tweeted activities by day",
+	  "data": {
+	    "values": activity_day
+	  },
+	  "mark": "point",
+	  "encoding": { 
+		"x": {"field": "time", "timeUnit": "day", "type":"ordinal"},
+		"y": {"field": "distance", "type": "quantitative"},
+		"color": {"field": "activityType", "type": "nominal"}
+	  }
+	}
+	vegaEmbed('#distanceVis', activityday_vis_spec, {actions:false});
+}
 //Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', function (event) {
 	loadSavedRunkeeperTweets().then(parseTweets);
