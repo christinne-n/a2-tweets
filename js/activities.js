@@ -64,13 +64,13 @@ function parseTweets(runkeeper_tweets) {
 		return top_act.includes(tweet.activityType); }).map(function(tweet){
 		return {activityType: tweet.activityType, distance: tweet.distance, time: tweet.time};
 	});
-
+	//chart 2
 	activityday_vis_spec = {
 	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 	  "description": "A graph of the 3 most tweeted activities by day",
 	  "data": {
 	    "values": activity_day
-	  },
+	  }, //copied and pasted from chart 1 but changed encoding
 	  "mark": "point",
 	  "encoding": { 
 		"x": {"field": "time", "timeUnit": "day", "type":"ordinal"},
@@ -79,6 +79,21 @@ function parseTweets(runkeeper_tweets) {
 	  }
 	}
 	vegaEmbed('#distanceVis', activityday_vis_spec, {actions:false});
+
+	//chart 3, mean of chart 2 distance per day
+	meanactivity_vis_spec = {
+	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+	  "description": "A graph of the mean distance of top 3 activities by day",
+	  "data": {
+	    "values": activity_day}, //copied and pasted from chart 2 but changed encoding
+	  "mark": "point",
+	  "encoding": { 
+		"x": {"field": "time", "timeUnit": "day", "type":"ordinal"},
+		"y": {"field": "distance", "type": "quantitative", "aggregate":"mean"},
+		"color": {"field": "activityType", "type": "nominal"}
+	  }
+	}
+	vegaEmbed('#distanceVisAggregated', meanactivity_vis_spec, {actions:false});
 }
 //Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', function (event) {
