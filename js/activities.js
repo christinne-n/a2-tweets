@@ -37,13 +37,20 @@ function parseTweets(runkeeper_tweets) {
 	document.getElementById('longestActivityType').innerText = "bike";
 	document.getElementById('shortestActivityType').innerText = "walk";
 	document.getElementById('weekdayOrWeekendLonger').innerText = "weekends";
+	
+	//chart 1, num of tweets per activity
+	var activity_type = complete_tweets.map(function(tweet){
+		return {activityType: tweet.activityType};
+	});
 
 	activity_vis_spec = {
 	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 	  "description": "A graph of the number of Tweets containing each type of activity.",
 	  "data": {
-	    "values": tweet_array
-	  }
+	    "values": activity_type
+	  },
+	  "mark": "bar",
+	  
 	  //TODO: Add mark and encoding
 
 	};
