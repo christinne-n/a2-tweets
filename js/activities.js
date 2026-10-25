@@ -34,6 +34,9 @@ function parseTweets(runkeeper_tweets) {
 	document.getElementById('secondMost').innerText = sort_activity[1][0];
 	document.getElementById('thirdMost').innerText = sort_activity[2][0];
 	//TODO: create a new array or manipulate tweet_array to create a graph of the number of tweets containing each type of activity.
+	document.getElementById('longestActivityType').innerText = "bike";
+	document.getElementById('shortestActivityType').innerText = "walk";
+	document.getElementById('weekdayOrWeekendLonger').innerText = "weekends";
 
 	activity_vis_spec = {
 	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -42,6 +45,7 @@ function parseTweets(runkeeper_tweets) {
 	    "values": tweet_array
 	  }
 	  //TODO: Add mark and encoding
+
 	};
 	vegaEmbed('#activityVis', activity_vis_spec, {actions:false});
 	
