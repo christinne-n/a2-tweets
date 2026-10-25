@@ -94,7 +94,8 @@ function parseTweets(runkeeper_tweets) {
 	  }
 	}
 	vegaEmbed('#distanceVisAggregated', meanactivity_vis_spec, {actions:false});
-
+	document.getElementById('distanceVis').style.display="block"; 
+	//making sure button is at the top always, was switching from bottom to top
 	document.getElementById('distanceVisAggregated').style.display="none"; //all activities
 
 	//button to swap the charts we want to see
