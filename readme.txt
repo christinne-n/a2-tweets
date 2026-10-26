@@ -1,4 +1,5 @@
 --Readme document for *Christine Nguyen*, *chrisln4@uci.edu*--
+https://github.com/christinne-n/a2-tweets 
 
 1. How many assignment points do you believe you completed (replace the *'s with your numbers)?
 
