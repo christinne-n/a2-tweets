@@ -1,4 +1,5 @@
 //WORK ON THIS FILE
+var user_tweets = []; //parsetweets will add to this when searching
 
 function parseTweets(runkeeper_tweets) {
 	//Do not proceed if no tweets loaded
@@ -6,8 +7,10 @@ function parseTweets(runkeeper_tweets) {
 		window.alert('No tweets returned');
 		return;
 	}
-
 	//TODO: Filter to just the written tweets
+	user_tweets = runkeeper_tweets.map(function(tweet){
+		
+	})
 }
 
 function addEventHandlerForSearch() {
