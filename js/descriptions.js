@@ -24,7 +24,7 @@ function addEventHandlerForSearch() {
 	searchbox.addEventListener('input', function(){ 
 		var text = searchbox.value;
 		var table = document.getElementById('tweetTable');
-		table.innerHTML = ""; //clear results
+		table.innerHTML = ""; //empty results
 		document.getElementById('searchText').innerText = text;
 
 		//empty = no results
